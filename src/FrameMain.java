@@ -54,14 +54,8 @@ public class FrameMain extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 String text = textArea.getText();
-                String[] words = text.split(" ");
-                MyMap<String, Integer> mymap = new MyMap<>();
-                mymap = AbbreviationCounterSelf.abbreviationsself(words);
-                Map<String, Integer> abbreviations = new HashMap<>();
-                for (MyMap.Entry<String, Integer> entry : mymap.entrySet()) {
-                    abbreviations.put(entry.getKey(), entry.getValue());
-                }
-                textField1.setText(abbreviations.toString());
+                String text2 = Logic.withMyRealis(text);
+                textField1.setText(text2);
 
             }
         });

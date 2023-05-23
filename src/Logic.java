@@ -30,6 +30,31 @@ public class Logic {
         return result.toString();
     }
 
+    public static String withMyRealis(String text) {
+
+        SimpleHashMap<String, Integer> properNounsMap = new SimpleHashMap<>(100);
+        Pattern pattern = Pattern.compile("(?<=^|\\s)([А-Я][а-я]+)(?=$|\\s)");
+        Matcher matcher = pattern.matcher(text);
+
+        while (matcher.find()) {
+            String properNoun = matcher.group(1);
+            if (properNounsMap.containsKey(properNoun)) {
+                properNounsMap.put(properNoun, properNounsMap.get(properNoun) + 1);
+            } else {
+                properNounsMap.put(properNoun, 1);
+            }
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<String, Integer> entry : properNounsMap.entrySet()) {
+            if (result.length() > 0) {
+                result.append(", ");
+            }
+            result.append(entry.getKey()).append(": ").append(entry.getValue());
+        }
+        return result.toString();
+    }
+
     /*public static void main(String[] args) {
         System.out.println(withStundartRealis("Вася Пупкин, Иван Иванов, Петр Петров и Сергей Сидоров пошли гулять в парк. \" +\n" +
                 "                \"Вася купил мороженое, а Сергей купил попкорн. \" +\n" +
