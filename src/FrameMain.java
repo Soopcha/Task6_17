@@ -62,13 +62,31 @@ public class FrameMain extends JFrame {
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                fileChooserOpen.showOpenDialog(panel1);
+                /*fileChooserOpen.showOpenDialog(panel1);
 
                 File file = fileChooserOpen.getSelectedFile();
                 try {
                     Scanner scanner = new Scanner(file);
                     String n = scanner.nextLine();
                     textArea.setText(n);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
+                 */
+
+
+                fileChooserOpen.showOpenDialog(panel1);
+
+                File file = fileChooserOpen.getSelectedFile();
+                try {
+                    Scanner scanner = new Scanner(file);
+                    StringBuilder sb = new StringBuilder();
+                    while (scanner.hasNextLine()) {
+                        sb.append(scanner.nextLine());
+                        sb.append("n"); // добавляем перевод строки после каждой строки текста
+                    }
+                    textArea.setText(sb.toString());
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }
